@@ -22,34 +22,42 @@ $loop=$x*$y;
 $broj=1;
 $matrica=array();
 
-while($broj<$loop){
+for($broj;$broj<=$loop;){
     for($j=$yos;$j>=0;$j--){
         $matrica[$red][$stupac]=$broj++;
         $stupac--;
+        if($broj>$loop){
+            break;
+        }
     }
 
     for($j=$xos;$j>=0;$j--){
         $matrica[$red][$stupac]=$broj++;
         $red--;
+        if($broj>$loop){
+            break;
+        }
     }
 
     for($i=0;$i<=$yos;$i++){
         $matrica[$red][$stupac]=$broj++;
         $stupac++;
+        if($broj>$loop){
+            break;
+        }
     }
     
     for($i=0;$i<=$xos;$i++){
         $matrica[$red][$stupac]=$broj++;
         $red++;
+        if($broj>$loop){
+            break;
+        }
     }
     $red-=1;
     $stupac-=1;
     $yos-=2;
     $xos-=2;
-}
-
-if($yos&$xos=0|-1){
-    $matrica[$red][$stupac]=$broj;
 }
 
 echo '<table>';
