@@ -1,63 +1,67 @@
 <?php
 
 if(isset($_GET['x'])){
-    $x=$_GET['x'];
+    $red=$_GET['x'];
 }else{
     echo 'Obavezno postavljanje GET parametra x za broj redova';
     exit;
 }
 
 if(isset($_GET['y'])){
-    $y=$_GET['y'];
+    $stupac=$_GET['y'];
 }else{
     echo 'Obavezno postavljanje GET parametra y za broj stupaca';
     exit;
 }
 
-$xos=$x-2;
-$yos=$y-2;
-$red=$x-1;
-$stupac=$y-1;
-$loop=$x*$y;
+$petlja=$red*$stupac;
+
+$red--;
+$stupac--;
+
+$lijevo = 0;
+$gore = 0;
+$desno = $stupac;
+$dolje = $red;
+
 $broj=1;
-$matrica=array();
+$matrica=[];
 
-for($broj;$broj<=$loop;){
-    for($j=$yos;$j>=0;$j--){
-        $matrica[$red][$stupac]=$broj++;
-        $stupac--;
-        if($broj>$loop){
-            break;
-        }
+while($broj<=$petlja){
+    for($j=$desno;$j>=$lijevo;$j--){
+        $matrica[$dolje][$j]=$broj++;
+    }
+    $dolje--;
+    if($broj>$petlja){
+        break;
     }
 
-    for($j=$xos;$j>=0;$j--){
-        $matrica[$red][$stupac]=$broj++;
-        $red--;
-        if($broj>$loop){
-            break;
-        }
-    }
 
-    for($i=0;$i<=$yos;$i++){
-        $matrica[$red][$stupac]=$broj++;
-        $stupac++;
-        if($broj>$loop){
-            break;
-        }
+   for($j=$dolje;$j>=$gore;$j--){
+        $matrica[$j][$lijevo]=$broj++;
+    }
+    $lijevo++;
+    if($broj>$petlja){
+        break;
+    }   
+
+
+    for($j=$lijevo;$j<=$desno;$j++){
+        $matrica[$gore][$j]=$broj++;
+    }
+    $gore++;
+    if($broj>$petlja){
+        break;
     }
     
-    for($i=0;$i<=$xos;$i++){
-        $matrica[$red][$stupac]=$broj++;
-        $red++;
-        if($broj>$loop){
-            break;
-        }
+
+    for($j=$gore;$j<=$dolje;$j++){
+        $matrica[$j][$desno]=$broj++;
     }
-    $red-=1;
-    $stupac-=1;
-    $yos-=2;
-    $xos-=2;
+    $desno--;
+    if($broj>$petlja){
+        break;
+    }
 }
 
 echo '<table>';
